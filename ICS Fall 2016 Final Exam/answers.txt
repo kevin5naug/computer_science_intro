@@ -1,0 +1,65 @@
+Q1: Short Lecture Questions
+1. Describe its rough steps of K-nearest neighbors; pseudo code preferred.
+
+for each point in the collection of points:
+    calculate the distance from our target point to every known point
+    append the tuple (point, distance) to the “distance list”
+
+sort the “distance list” according to the distance from the smallest distance to the biggest distance
+
+excerpt first k elements from the “distance list”
+
+create a new dictionary D for classes, the entry is one of the classes appeared in the collection of points and the values corresponding to each entry are all 0 at the present. 
+
+for each item in the first k elements:
+    D[item_class]+=1
+    
+sort the dictionary D according to its value from the biggest to the smallest
+Then the first element will be a class, which our target point belongs to.
+
+
+
+
+
+
+2. We have a dataset contains salary, age, educational background and many other parameters. We want to train the computer to intelligently guess new users' salary, given their other data, which method (regression, classification and clustering) should we use and why?
+
+Classification, because we already have the labels to classify each user. Then for the new user, after training, the computer can divide the data into several categories and adopt classification approach like K—nearest neighbors to determine which category this new user belongs to. The range of new user’s salary will thus be the same as the range of salary in that category of users.
+
+
+
+
+
+3. Give an example of a greedy algorithm, and explain why this algorithm might not be optimal.
+
+The epsilon-greedy algorithm:
+At each step throw a coin. With chance epsilon: explore randomly; otherwise, exploit (adopting the best strategy known)
+Estimate the values along the way. 
+Update the values
+
+We once used this epsilon-greedy algorithm to get out of a maze. There are chances that this algorithm always explore randomly or exploit. Then the values will not be correctly updated and thus the algorithm might not be able to offer us the best strategy. We can only expect it to approximate the optimal solution after we have trained the computer many times. Furthermore, this algorithm has something to do with the balance between the instant reward and reward in the future, which might weaken its effectiveness.
+
+
+
+
+Q3.2: Group the Twitters
+Part 2:
+Describe in English: How will you apply K-means to cluster the users based on the features.
+
+Use users’ features as their individual coordinates, named as “(user)point”
+
+Set up 2 empty clusters class, each center is at one of 2 randomly picked (user)points from our samples.
+
+converged=False
+
+While not converged:
+    for each (user)point in the collection of samples:
+            finds its closest center of one cluster and append itself to that cluster
+    for each cluster:
+            computes its new centroid
+    if no cluster changes its centroid:
+            converged=True
+    else:
+         both clusters clear its (user)points and go over the loop again
+
+Then after the loop ends, all users have been clustered into two groups according to their features. Print the result of the clustering
